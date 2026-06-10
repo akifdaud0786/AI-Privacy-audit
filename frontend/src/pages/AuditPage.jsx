@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { API_URLS } from "../apiConfig";
 
 const AUDIT_CATEGORIES = [
   { id: "data_collection", label: "Data Collection & Purpose", icon: "◈" },
@@ -134,7 +135,7 @@ Provide a comprehensive audit in the following EXACT JSON structure:
 Return ONLY valid JSON, no markdown fences.`;
 
     try {
-      const response = await fetch("/api/audit/stream", {
+      const response = await fetch(API_URLS.auditStream, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -226,7 +227,7 @@ Return ONLY valid JSON, no markdown fences.`;
   const handleExport = async (format) => {
     try {
       addNotification(`Preparing ${format.toUpperCase()} export...`, "info");
-      const response = await fetch(`/api/export/${format}`, {
+      const response = await fetch(API_URLS.export(format), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(results)

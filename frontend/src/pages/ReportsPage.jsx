@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { API_URLS } from "../apiConfig";
 
 const MOCK_REPORTS = [
   { id: "r1", name: "Full Compliance Audit - Q2 2025", date: "2025-06-01", score: 74, framework: "Both", violations: 14, status: "completed" },
@@ -49,7 +50,7 @@ Always be helpful and specific. Reference actual regulation articles and section
 
     try {
       const history = messages.map(m => ({ role: m.role, content: m.content }));
-      const response = await fetch("/api/chat", {
+      const response = await fetch(API_URLS.chat, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -79,7 +80,7 @@ Always be helpful and specific. Reference actual regulation articles and section
 
     try {
       addNotification(`Preparing ${format.toUpperCase()} export...`, "info");
-      const response = await fetch(`/api/export/${format}`, {
+      const response = await fetch(API_URLS.export(format), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(targetData)

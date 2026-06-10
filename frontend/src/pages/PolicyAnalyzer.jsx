@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { API_URLS } from "../apiConfig";
 
 const SAMPLE_POLICY = `Privacy Policy — TechFlow Solutions Pvt. Ltd.
 Last Updated: January 2022
@@ -75,7 +76,7 @@ Return ONLY valid JSON (no markdown fences):
 }`;
 
     try {
-      const response = await fetch("/api/policy/analyze", {
+      const response = await fetch(API_URLS.policyAnalyze, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
