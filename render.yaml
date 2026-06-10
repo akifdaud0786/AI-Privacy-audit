@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: privacy-audit-api
+    env: python
+    buildCommand: pip install -r backened_server/requirements.txt
+    startCommand: gunicorn -w 4 -k uvicorn.workers.UvicornWorker backened_server.main:app
+    envVars:
+      - key: GROQ_API_KEY
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
